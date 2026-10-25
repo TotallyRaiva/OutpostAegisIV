@@ -265,7 +265,7 @@ namespace OutpostAegis.Enemies
             }
         }
 
-        public void TakeDamage(float rawDamage, DamageType damageType, bool attackIgnoresCover)
+        public void TakeDamage(float rawDamage, DamageType damageType, bool ignoresCover = false)
         {
             if (IsDead) return;
 
@@ -275,7 +275,7 @@ namespace OutpostAegis.Enemies
                 damageType,
                 Data.armorType,
                 inCover,
-                attackIgnoresCover,
+                ignoresCover,
                 1f + _armorDebuffBonus);
 
             CurrentHealth -= finalDamage;
