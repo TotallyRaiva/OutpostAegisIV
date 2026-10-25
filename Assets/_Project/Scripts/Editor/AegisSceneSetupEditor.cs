@@ -18,13 +18,49 @@ namespace OutpostAegis.Editor
     /// (5 Towers x 3 Tiers, 8 Ork Enemies, 20 Waves, 2 Command Abilities) and constructs
     /// the playable Outpost Aegis-IV scene with dual converging lanes, Promethium Bridge, and Cliff Ledges.
     /// </summary>
+    [InitializeOnLoad]
     public static class AegisSceneSetupEditor
     {
         private const string DataRoot = "Assets/_Project/Data";
         private const string ScenePath = "Assets/_Project/Scenes/OutpostAegisIV.unity";
 
+        static AegisSceneSetupEditor()
+        {
+            EditorApplication.delayCall += AutoInitializeIfNeeded;
+        }
+
+        private static void AutoInitializeIfNeeded()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+                return;
+
+            bool sceneExists = AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath) != null;
+            if (!sceneExists)
+            {
+                GenerateAllDataAndSceneInternal(showDialog: false);
+            }
+            else if (string.IsNullOrEmpty(EditorSceneManager.GetActiveScene().path))
+            {
+                EditorSceneManager.OpenScene(ScenePath);
+            }
+        }
+
         [MenuItem("Tools/Outpost Aegis-IV/Generate Data & Prototype Scene", priority = 1)]
         public static void GenerateAllDataAndScene()
+        {
+            if (EditorApplication.isPlaying)
+            {
+                EditorUtility.DisplayDialog(
+                    "Exit Play Mode First",
+                    "Please click the Play button at the top center to exit Play Mode before generating the scene.",
+                    "OK");
+                return;
+            }
+
+            GenerateAllDataAndSceneInternal(showDialog: true);
+        }
+
+        private static void GenerateAllDataAndSceneInternal(bool showDialog)
         {
             EnsureFolders();
 
@@ -38,11 +74,19 @@ namespace OutpostAegis.Editor
 
             BuildOutpostAegisScene(towers, waves, abilities);
 
+            EditorBuildSettings.scenes = new[]
+            {
+                new EditorBuildSettingsScene(ScenePath, true)
+            };
+
             Debug.Log("[Outpost Aegis-IV] Generated all ScriptableObject assets and playable scene at " + ScenePath);
-            EditorUtility.DisplayDialog(
-                "Outpost Aegis-IV Ready!",
-                "Generated:\n• 5 Imperial Towers (3 Upgrade Tiers each)\n• 8 Ork Enemy Classes (including Wave 20 Gargant Boss)\n• 20 WAAAGH! Waves\n• 2 Command Abilities (Orbital Bombardment & Drop Pod Assault)\n• OutpostAegisIV.unity Scene\n\nPress PLAY in the Unity Editor to test the siege!",
-                "For the Emperor!");
+            if (showDialog)
+            {
+                EditorUtility.DisplayDialog(
+                    "Outpost Aegis-IV Ready!",
+                    "Generated:\n• 5 Imperial Towers (3 Upgrade Tiers each)\n• 8 Ork Enemy Classes (including Wave 20 Gargant Boss)\n• 20 WAAAGH! Waves\n• 2 Command Abilities (Orbital Bombardment & Drop Pod Assault)\n• OutpostAegisIV.unity Scene\n\nPress PLAY in the Unity Editor to test the siege!",
+                    "For the Emperor!");
+            }
         }
 
         private static void EnsureFolders()
