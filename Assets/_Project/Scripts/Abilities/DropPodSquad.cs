@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using OutpostAegis.Core;
 using OutpostAegis.Data;
 using OutpostAegis.Enemies;
 using OutpostAegis.Towers;
@@ -23,6 +24,13 @@ namespace OutpostAegis.Abilities
         {
             _abilityData = data;
             _remainingLifetime = data.squadLifetimeSeconds;
+
+            SoundManager.Play(SfxType.DropPodSlam, 0.90f);
+            CameraController.TriggerShake(0.30f, 0.38f);
+            FloatingTextManager.SpawnCallout(
+                transform.position, "FOR THE EMPEROR!", new Color(0.35f, 0.78f, 1.0f), 34, 1.1f);
+            FloatingTextManager.SpawnPixelBurst(
+                transform.position, new Color(0.35f, 0.78f, 1.0f), count: 12, speed: 3.2f);
 
             // Impact shockwave damage when the Drop Pod slams down
             for (int i = EnemyController.ActiveEnemies.Count - 1; i >= 0; i--)

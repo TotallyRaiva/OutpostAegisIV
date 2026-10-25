@@ -71,6 +71,7 @@ namespace OutpostAegis.Waves
             CurrentWaveIndex++;
             WaveDataSO wave = waves[CurrentWaveIndex];
 
+            SoundManager.Play(SfxType.WaveStartHorn, 0.8f);
             GameManager.Instance.SetGameState(GameState.WaveInProgress);
             GameManager.Instance.BroadcastVox($"WAVE {wave.waveNumber}/{waves.Count} — {wave.waveTitle}: {wave.incomingTransmissionText}");
             OnWaveChanged?.Invoke(wave.waveNumber, waves.Count, wave.waveTitle);

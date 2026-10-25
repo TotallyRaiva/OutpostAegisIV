@@ -88,6 +88,7 @@ namespace OutpostAegis.Map
             InstalledTower = towerObj.AddComponent<TowerController>();
             InstalledTower.Initialize(towerData, this);
 
+            SoundManager.Play(SfxType.TowerConstruct, 0.72f);
             ShowRangeIndicator(true);
             return true;
         }
@@ -102,6 +103,7 @@ namespace OutpostAegis.Map
                 return false;
 
             InstalledTower.UpgradeToNextTier();
+            SoundManager.Play(SfxType.TowerConstruct, 0.82f);
             ShowRangeIndicator(true);
             return true;
         }

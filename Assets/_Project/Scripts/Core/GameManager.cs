@@ -51,6 +51,11 @@ namespace OutpostAegis.Core
 
         private void Start()
         {
+            if (GetComponent<SoundManager>() == null)
+                gameObject.AddComponent<SoundManager>();
+            if (GetComponent<FloatingTextManager>() == null)
+                gameObject.AddComponent<FloatingTextManager>();
+
             EnsurePixelEnvironmentRenderer();
             ResetMatchState();
         }

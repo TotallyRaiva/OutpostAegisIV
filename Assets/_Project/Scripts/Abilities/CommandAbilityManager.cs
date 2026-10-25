@@ -128,10 +128,18 @@ namespace OutpostAegis.Abilities
 
         private IEnumerator OrbitalBombardmentRoutine(AbilityDataSO ability, Vector3 targetPos)
         {
+            SoundManager.Play(SfxType.OrbitalLockOn, 0.85f);
+            FloatingTextManager.SpawnCallout(
+                targetPos, "ORBITAL LANCE LOCKED!", new Color(1f, 0.35f, 0.25f), 34, ability.strikeWarningDelay);
             GameManager.Instance.BroadcastVox("ORBITAL LANCE LOCKED: Stand clear of bombardment zone!");
             Projectile.SpawnImpactFlash(targetPos, ability.effectRadius * 2f, new Color(1f, 0.15f, 0.15f, 0.35f));
 
             yield return new WaitForSeconds(ability.strikeWarningDelay);
+
+            SoundManager.Play(SfxType.OrbitalStrike, 1.0f);
+            CameraController.TriggerShake(0.55f, 0.65f);
+            FloatingTextManager.SpawnPixelBurst(
+                targetPos, new Color(1f, 0.82f, 0.28f), count: 18, speed: 4.5f);
 
             // Orbital laser column visual
             GameObject beamObj = new GameObject("VFX_OrbitalLance");

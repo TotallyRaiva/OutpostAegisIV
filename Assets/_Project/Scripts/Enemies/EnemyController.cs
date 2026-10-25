@@ -250,6 +250,11 @@ namespace OutpostAegis.Enemies
                 }
             }
 
+            SoundManager.Play(SfxType.WaaaghRoar, 0.95f);
+            CameraController.TriggerShake(0.32f, 0.45f);
+            FloatingTextManager.SpawnCallout(
+                transform.position, "WAAAGH! +45% SPD!", new Color(1f, 0.35f, 0.15f), 36, 1.1f);
+
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.BroadcastVox(
@@ -265,10 +270,18 @@ namespace OutpostAegis.Enemies
                 Data.bossTowerDisableDuration,
                 Data.bossMaxTowersDisabled);
 
-            if (disabled > 0 && GameManager.Instance != null)
+            if (disabled > 0)
             {
-                GameManager.Instance.BroadcastVox(
-                    $"ALERT: {Data.displayName} unleashed a Mega-Slam shockwave, disabling {disabled} nearby tower(s)!");
+                SoundManager.Play(SfxType.ArtilleryExplosion, 0.85f);
+                CameraController.TriggerShake(0.28f, 0.38f);
+                FloatingTextManager.SpawnCallout(
+                    transform.position, "MEGA-SLAM EMP!", new Color(0.4f, 0.85f, 1f), 34, 1.0f);
+
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.BroadcastVox(
+                        $"ALERT: {Data.displayName} unleashed a Mega-Slam shockwave, disabling {disabled} nearby tower(s)!");
+                }
             }
         }
 
@@ -277,6 +290,7 @@ namespace OutpostAegis.Enemies
             if (IsDead) return;
 
             bool inCover = CoverZone.IsPositionInCover(transform.position);
+            float effectiveness = DamageMatrix.GetDamageMultiplier(damageType, Data.armorType) * (1f + _armorDebuffBonus);
             float finalDamage = DamageMatrix.CalculateFinalDamage(
                 rawDamage,
                 damageType,
@@ -286,6 +300,8 @@ namespace OutpostAegis.Enemies
                 1f + _armorDebuffBonus);
 
             CurrentHealth -= finalDamage;
+
+            FloatingTextManager.SpawnDamageNumber(transform.position, finalDamage, damageType, effectiveness);
 
             if (_healthBarFill != null)
             {
@@ -368,9 +384,18 @@ namespace OutpostAegis.Enemies
             if (IsDead) return;
             IsDead = true;
 
-            if (rewardPlayer && GameManager.Instance != null)
+            if (rewardPlayer)
             {
-                GameManager.Instance.AddRequisition(Data.requisitionReward);
+                SoundManager.Play(SfxType.OrkDeath, 0.55f);
+                FloatingTextManager.SpawnCallout(
+                    transform.position, $"+{Data.requisitionReward} RP", new Color(1f, 0.86f, 0.25f), 26, 0.8f);
+                FloatingTextManager.SpawnPixelBurst(
+                    transform.position, new Color(0.28f, 0.65f, 0.18f), count: 7, speed: 2.6f);
+
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.AddRequisition(Data.requisitionReward);
+                }
             }
 
             OnEnemyDefeated?.Invoke(this);

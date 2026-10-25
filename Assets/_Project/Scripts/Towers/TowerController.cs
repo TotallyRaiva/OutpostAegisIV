@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using OutpostAegis.Core;
 using OutpostAegis.Data;
 using OutpostAegis.Enemies;
 using OutpostAegis.Map;
@@ -283,6 +284,7 @@ namespace OutpostAegis.Towers
             if (Data.isContinuousCone)
             {
                 // Hellhound Flame-Bunker continuous AoE cone
+                SoundManager.Play(SfxType.FlamerWhoosh, 0.55f);
                 ExecuteFlameConeAttack(primaryTarget.transform.position, tier);
                 return;
             }
@@ -290,7 +292,9 @@ namespace OutpostAegis.Towers
             if (Data.category == TowerCategory.LascannonTurret)
             {
                 // Instant hitscan Lascannon beam for crisp sniper responsiveness
+                SoundManager.Play(SfxType.LascannonZap, 0.72f);
                 DrawLaserBeam(transform.position, primaryTarget.transform.position, Data.accentColor, 0.14f, 0.12f);
+                FloatingTextManager.SpawnPixelBurst(primaryTarget.transform.position, Data.accentColor, count: 5, speed: 2.2f);
                 if (tier.armorVulnerabilityBonus > 0f)
                 {
                     primaryTarget.ApplyArmorVulnerability(tier.armorVulnerabilityBonus, tier.armorVulnerabilityDuration);
@@ -298,6 +302,10 @@ namespace OutpostAegis.Towers
                 primaryTarget.TakeDamage(tier.damage, Data.damageType, Data.ignoresCover);
                 return;
             }
+
+            SoundManager.Play(
+                Data.isGlobalArtillery ? SfxType.ArtilleryFire : SfxType.BolterShot,
+                Data.isGlobalArtillery ? 0.68f : 0.48f);
 
             // Spawn kinetic bolter shell or Basilisk artillery projectile
             GameObject projObj = new GameObject($"Proj_{Data.displayName}");

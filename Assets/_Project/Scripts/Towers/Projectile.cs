@@ -1,3 +1,4 @@
+using OutpostAegis.Core;
 using OutpostAegis.Data;
 using OutpostAegis.Enemies;
 using OutpostAegis.Visuals;
@@ -86,6 +87,11 @@ namespace OutpostAegis.Towers
             if (_splashRadius > 0.05f)
             {
                 // Explosive splash (Basilisk Artillery Pit)
+                SoundManager.Play(SfxType.ArtilleryExplosion, 0.78f);
+                CameraController.TriggerShake(0.16f, 0.24f);
+                FloatingTextManager.SpawnPixelBurst(
+                    _targetPosition, new Color(1f, 0.58f, 0.16f), count: 10, speed: 3.4f);
+
                 for (int i = EnemyController.ActiveEnemies.Count - 1; i >= 0; i--)
                 {
                     EnemyController enemy = EnemyController.ActiveEnemies[i];
