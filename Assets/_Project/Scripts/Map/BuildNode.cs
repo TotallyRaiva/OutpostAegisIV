@@ -1,9 +1,11 @@
 using System;
+using OutpostAegis.Abilities;
 using OutpostAegis.Core;
 using OutpostAegis.Data;
 using OutpostAegis.Towers;
 using OutpostAegis.Visuals;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace OutpostAegis.Map
 {
@@ -55,6 +57,12 @@ namespace OutpostAegis.Map
 
         private void OnMouseDown()
         {
+            if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            if (CommandAbilityManager.Instance != null && CommandAbilityManager.Instance.ActiveTargetingAbility != null)
+                return;
+
             OnNodeSelected?.Invoke(this);
         }
 

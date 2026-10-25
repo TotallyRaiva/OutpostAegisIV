@@ -819,6 +819,206 @@ namespace OutpostAegis.Visuals
         }
 
         // =====================================================================
+        // 5. GRIMDARK SERVO-SKULL & COGITATOR CRT UGUI SPRITES
+        // =====================================================================
+
+        /// <summary>
+        /// 9-sliced Imperial Cogitator panel frame with brass corner rivets and CRT scanlines.
+        /// </summary>
+        public static Sprite GetCogitatorPanelSprite(bool crtGreenScreen = false)
+        {
+            string key = $"ui_cogitator_panel_{crtGreenScreen}";
+            if (SingleCache.TryGetValue(key, out Sprite cached) && cached != null) return cached;
+
+            int size = 32;
+            Texture2D tex = CreateBlankTexture(size, size);
+
+            Color outerRim = new Color(0.08f, 0.08f, 0.10f, 0.96f);
+            Color brassBorder = crtGreenScreen
+                ? new Color(0.32f, 0.72f, 0.42f, 0.95f)
+                : new Color(0.78f, 0.62f, 0.22f, 0.96f);
+            Color bgMain = crtGreenScreen
+                ? new Color(0.04f, 0.14f, 0.07f, 0.94f)
+                : new Color(0.11f, 0.12f, 0.14f, 0.94f);
+            Color bgScanline = crtGreenScreen
+                ? new Color(0.06f, 0.20f, 0.10f, 0.94f)
+                : new Color(0.14f, 0.15f, 0.18f, 0.94f);
+
+            DrawRect(tex, 0, 0, size - 1, size - 1, outerRim);
+            DrawRect(tex, 1, 1, size - 2, size - 2, brassBorder);
+
+            for (int y = 3; y < size - 3; y++)
+            {
+                Color rowCol = (y % 2 == 0) ? bgMain : bgScanline;
+                for (int x = 3; x < size - 3; x++)
+                {
+                    tex.SetPixel(x, y, rowCol);
+                }
+            }
+
+            // Corner brass rivets
+            Color rivet = new Color(0.95f, 0.82f, 0.35f, 1f);
+            tex.SetPixel(4, 4, rivet);
+            tex.SetPixel(size - 5, 4, rivet);
+            tex.SetPixel(4, size - 5, rivet);
+            tex.SetPixel(size - 5, size - 5, rivet);
+
+            tex.Apply();
+            Sprite s = Sprite.Create(
+                tex,
+                new Rect(0, 0, size, size),
+                new Vector2(0.5f, 0.5f),
+                PixelsPerUnit,
+                0,
+                SpriteMeshType.FullRect,
+                new Vector4(6, 6, 6, 6));
+            SingleCache[key] = s;
+            return s;
+        }
+
+        /// <summary>
+        /// 32x32 Adeptus Mechanicus Servo-Skull pixel-art portrait with glowing bionic red lens.
+        /// </summary>
+        public static Sprite GetServoSkullSprite()
+        {
+            const string key = "ui_servo_skull_v1";
+            if (SingleCache.TryGetValue(key, out Sprite cached) && cached != null) return cached;
+
+            int size = 32;
+            Texture2D tex = CreateBlankTexture(size, size);
+            Color boneDark = new Color(0.52f, 0.48f, 0.38f);
+            Color boneMid = new Color(0.76f, 0.72f, 0.58f);
+            Color boneLight = new Color(0.92f, 0.88f, 0.76f);
+            Color steel = new Color(0.32f, 0.35f, 0.40f);
+            Color brass = new Color(0.85f, 0.68f, 0.22f);
+            Color bionicRed = new Color(1.0f, 0.16f, 0.14f);
+
+            // Trailing mech-tendrils / cables below skull
+            DrawRect(tex, 11, 2, 12, 8, steel);
+            DrawRect(tex, 16, 1, 17, 8, brass);
+            DrawRect(tex, 20, 3, 21, 8, steel);
+
+            // Cranium dome
+            DrawOctagon(tex, 16, 19, 9, boneDark);
+            DrawOctagon(tex, 16, 20, 8, boneMid);
+            DrawRect(tex, 12, 23, 19, 26, boneLight);
+
+            // Bionic temple plate (left)
+            DrawRect(tex, 8, 18, 13, 24, steel);
+            DrawRect(tex, 9, 20, 11, 22, brass);
+
+            // Upper jaw & teeth
+            DrawRect(tex, 11, 9, 21, 14, boneMid);
+            for (int x = 12; x <= 20; x += 2)
+            {
+                DrawRect(tex, x, 9, x, 11, boneLight);
+                DrawRect(tex, x + 1, 9, x + 1, 11, boneDark);
+            }
+
+            // Left Eye Socket (dark) & Right Bionic Auspex Lens (glowing crimson)
+            DrawRect(tex, 11, 15, 14, 18, new Color(0.1f, 0.1f, 0.12f));
+            DrawRect(tex, 17, 14, 22, 19, brass);
+            DrawRect(tex, 18, 15, 21, 18, bionicRed);
+            tex.SetPixel(19, 17, new Color(1f, 0.75f, 0.75f));
+
+            tex.Apply();
+            Sprite s = Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), PixelsPerUnit);
+            SingleCache[key] = s;
+            return s;
+        }
+
+        /// <summary>
+        /// 128x128 Tactical Auspex Holo-Ring that frames a tapped BuildNode in screen space.
+        /// </summary>
+        public static Sprite GetRadialHoloRingSprite()
+        {
+            const string key = "ui_radial_holo_ring_v1";
+            if (SingleCache.TryGetValue(key, out Sprite cached) && cached != null) return cached;
+
+            int size = 128;
+            Texture2D tex = CreateBlankTexture(size, size);
+            int c = size / 2;
+
+            Color ringOuter = new Color(0.92f, 0.76f, 0.24f, 0.85f);
+            Color ringInner = new Color(0.28f, 0.88f, 0.52f, 0.55f);
+
+            DrawPixelCircleOutline(tex, c, c, 54, ringOuter);
+            DrawPixelCircleOutline(tex, c, c, 53, ringOuter);
+            DrawPixelCircleOutline(tex, c, c, 26, ringInner);
+
+            // Compass ticks at N/S/E/W
+            DrawRect(tex, c - 1, c + 49, c + 1, c + 58, ringOuter);
+            DrawRect(tex, c - 1, c - 58, c + 1, c - 49, ringOuter);
+            DrawRect(tex, c + 49, c - 1, c + 58, c + 1, ringOuter);
+            DrawRect(tex, c - 58, c - 1, c - 49, c + 1, ringOuter);
+
+            tex.Apply();
+            Sprite s = Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), PixelsPerUnit);
+            SingleCache[key] = s;
+            return s;
+        }
+
+        /// <summary>
+        /// 48x48 Octagonal brass-rimmed slot button for Radial Node Menu items.
+        /// </summary>
+        public static Sprite GetRadialSlotButtonSprite()
+        {
+            const string key = "ui_radial_slot_btn_v1";
+            if (SingleCache.TryGetValue(key, out Sprite cached) && cached != null) return cached;
+
+            int size = 48;
+            Texture2D tex = CreateBlankTexture(size, size);
+            int c = size / 2;
+
+            DrawOctagon(tex, c, c, 22, new Color(0.06f, 0.07f, 0.09f, 0.96f));
+            DrawOctagon(tex, c, c, 20, new Color(0.85f, 0.68f, 0.24f, 0.96f));
+            DrawOctagon(tex, c, c, 18, new Color(0.14f, 0.17f, 0.20f, 0.96f));
+
+            tex.Apply();
+            Sprite s = Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), PixelsPerUnit);
+            SingleCache[key] = s;
+            return s;
+        }
+
+        /// <summary>
+        /// 36x36 Pixel-Art icon for Command Abilities (Orbital Bombardment & Drop Pod Assault).
+        /// </summary>
+        public static Sprite GetAbilityIconSprite(CommandAbilityType type)
+        {
+            string key = $"ui_ability_icon_{type}";
+            if (SingleCache.TryGetValue(key, out Sprite cached) && cached != null) return cached;
+
+            int size = 36;
+            Texture2D tex = CreateBlankTexture(size, size);
+            int c = size / 2;
+
+            if (type == CommandAbilityType.OrbitalBombardment)
+            {
+                // Red targeting reticle + descending golden orbital laser lance
+                DrawPixelCircleOutline(tex, c, 10, 10, new Color(1f, 0.25f, 0.15f));
+                DrawRect(tex, c - 3, 10, c + 3, 33, new Color(1f, 0.55f, 0.15f));
+                DrawRect(tex, c - 1, 8, c + 1, 34, new Color(1f, 0.95f, 0.5f));
+                DrawOctagon(tex, c, 10, 5, new Color(1f, 0.85f, 0.3f));
+            }
+            else
+            {
+                // Ultramarine Blue & Gold Astartes Drop Pod slamming downward
+                Color blue = new Color(0.16f, 0.42f, 0.88f);
+                Color gold = new Color(0.92f, 0.78f, 0.25f);
+                DrawRect(tex, c - 7, 10, c + 7, 24, blue);
+                DrawRect(tex, c - 5, 24, c + 5, 30, gold);
+                DrawRect(tex, c - 9, 8, c + 9, 11, gold);
+                // Impact shockwave chevrons below pod
+                DrawRect(tex, c - 11, 4, c + 11, 6, new Color(0.4f, 0.8f, 1f));
+            }
+
+            tex.Apply();
+            Sprite s = Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), PixelsPerUnit);
+            SingleCache[key] = s;
+            return s;
+        }
+
+        // =====================================================================
         // PIXEL DRAWING HELPERS
         // =====================================================================
 

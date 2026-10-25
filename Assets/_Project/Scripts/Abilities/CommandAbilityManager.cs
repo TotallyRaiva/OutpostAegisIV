@@ -171,9 +171,13 @@ namespace OutpostAegis.Abilities
 
         private static bool IsPointerOverUI()
         {
-            // Prevent clicks in top/bottom HUD strips from accidentally firing abilities
+            if (UnityEngine.EventSystems.EventSystem.current != null &&
+                UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            {
+                return true;
+            }
             float y = Input.mousePosition.y;
-            return y < Screen.height * 0.14f || y > Screen.height * 0.88f;
+            return y < Screen.height * 0.12f || y > Screen.height * 0.89f;
         }
     }
 }
