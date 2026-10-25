@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95fda90f37b0b4909b46b7c86b3fc6db, type: 3}
+  m_Name: Wave_07
+  m_EditorClassIdentifier: 
+  waveNumber: 7
+  waveTitle: Iron & Smoke (Killa Kans)
+  incomingTransmissionText: 'HEAVY ARMOR: Killa Kans and Deff Dreads approaching!
+    Power up Lascannon Turrets!'
+  completionRequisitionBonus: 115
+  completionCommandPointBonus: 1
+  spawnGroups:
+  - groupNote: 19x Gretchin Runts (ScrapRoadNorth)
+    enemyData: {fileID: 11400000, guid: 60747e1ced28e4dde89e925bd7d100d9, type: 2}
+    lane: 0
+    count: 19
+    spawnInterval: 0.4
+    delayBeforeGroup: 0
+  - groupNote: 4x Killa Kan Walker (ScrapRoadNorth)
+    enemyData: {fileID: 11400000, guid: 365b0527a13064edc923659007a52910, type: 2}
+    lane: 0
+    count: 4
+    spawnInterval: 2.2
+    delayBeforeGroup: 1.5

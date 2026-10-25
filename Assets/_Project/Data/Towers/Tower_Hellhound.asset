@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab33327703b28497aa6dc86e26b88be3, type: 3}
+  m_Name: Tower_Hellhound
+  m_EditorClassIdentifier: 
+  towerId: hellhound_flame
+  displayName: Hellhound Flame-Bunker
+  category: 2
+  damageType: 2
+  allowedNodeTypes: 1
+  defaultPriority: 2
+  isContinuousCone: 1
+  isGlobalArtillery: 0
+  isSupportTower: 0
+  ignoresCover: 1
+  projectileSpeed: 18
+  primaryColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  accentColor: {r: 1, g: 0.45, b: 0.1, a: 1}
+  icon: {fileID: 0}
+  tiers:
+  - tierName: Inferno Flame-Bunker
+    description: Continuous promethium cone. Melts swarms on the Bridge and ignores
+      cover.
+    cost: 100
+    damage: 14
+    fireRate: 5
+    range: 2.8
+    areaParameter: 28
+    slowFactor: 0
+    slowDuration: 0
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0
+    auraFireRateBonusPercent: 0
+    revealsStealth: 0
+  - tierName: Pressurized Promethium Jet
+    description: Wider flame cone and hotter promethium mixture.
+    cost: 140
+    damage: 23
+    fireRate: 5.5
+    range: 3.2
+    areaParameter: 35
+    slowFactor: 0
+    slowDuration: 0
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0
+    auraFireRateBonusPercent: 0
+    revealsStealth: 0
+  - tierName: Bane-Wolf Chem-Inferno
+    description: Incinerates entire Ork mobs instantly and slows survivors.
+    cost: 210
+    damage: 36
+    fireRate: 6
+    range: 3.6
+    areaParameter: 42
+    slowFactor: 0
+    slowDuration: 0
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0
+    auraFireRateBonusPercent: 0
+    revealsStealth: 0

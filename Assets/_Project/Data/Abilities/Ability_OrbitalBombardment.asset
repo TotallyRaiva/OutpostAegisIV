@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d604df40a77a64a2dab1de36628ba8f1, type: 3}
+  m_Name: Ability_OrbitalBombardment
+  m_EditorClassIdentifier: 
+  abilityId: orbital_bombardment
+  displayName: Orbital Bombardment
+  abilityType: 0
+  description: High-damage Imperial Navy lance strike on a targeted area.
+  commandPointCost: 2
+  cooldownSeconds: 45
+  effectRadius: 3.2
+  impactDamage: 550
+  damageType: 3
+  strikeWarningDelay: 1.1
+  squadLifetimeSeconds: 15
+  marineCount: 3
+  maxBlockedEnemies: 4
+  squadMeleeDPS: 48
+  squadBolterDPS: 30
+  squadEngagementRadius: 2.8
+  indicatorColor: {r: 1, g: 0.3, b: 0.2, a: 0.65}

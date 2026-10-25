@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using OutpostAegis.Data;
+using OutpostAegis.Visuals;
 using UnityEngine;
 
 namespace OutpostAegis.Core
@@ -50,7 +51,20 @@ namespace OutpostAegis.Core
 
         private void Start()
         {
+            EnsurePixelEnvironmentRenderer();
             ResetMatchState();
+        }
+
+        private static void EnsurePixelEnvironmentRenderer()
+        {
+            if (FindObjectOfType<AshWasteMapRenderer>() != null) return;
+
+            GameObject envRoot = GameObject.Find("--- ENVIRONMENT & CHOKPOINTS ---");
+            if (envRoot == null)
+            {
+                envRoot = new GameObject("--- ENVIRONMENT & CHOKPOINTS ---");
+            }
+            envRoot.AddComponent<AshWasteMapRenderer>();
         }
 
         public void ResetMatchState()

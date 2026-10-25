@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab33327703b28497aa6dc86e26b88be3, type: 3}
+  m_Name: Tower_AstropathicRelay
+  m_EditorClassIdentifier: 
+  towerId: astropathic_relay
+  displayName: Astropathic Relay
+  category: 4
+  damageType: 4
+  allowedNodeTypes: 7
+  defaultPriority: 0
+  isContinuousCone: 0
+  isGlobalArtillery: 0
+  isSupportTower: 1
+  ignoresCover: 0
+  projectileSpeed: 18
+  primaryColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  accentColor: {r: 0.68, g: 0.38, b: 1, a: 1}
+  icon: {fileID: 0}
+  tiers:
+  - tierName: Sanctioned Psyker Spire
+    description: Reveals Stealth Kommandos and buffs nearby towers (+15% Range &
+      Fire Rate).
+    cost: 90
+    damage: 0
+    fireRate: 0
+    range: 4.2
+    areaParameter: 0
+    slowFactor: 0
+    slowDuration: 0
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0.15
+    auraFireRateBonusPercent: 0.15
+    revealsStealth: 1
+  - tierName: Astropathic Choir Conduit
+    description: Expands psychic detection radius and buffs nearby towers (+22% Range
+      & Fire Rate).
+    cost: 130
+    damage: 0
+    fireRate: 0
+    range: 5.2
+    areaParameter: 0
+    slowFactor: 0
+    slowDuration: 0
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0.22
+    auraFireRateBonusPercent: 0.22
+    revealsStealth: 1
+  - tierName: Librarius Telepathy Shrine
+    description: Map-dominating detection aura and +30% Range & Fire Rate to adjacent
+      towers.
+    cost: 190
+    damage: 0
+    fireRate: 0
+    range: 6.4
+    areaParameter: 0
+    slowFactor: 0
+    slowDuration: 0
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0.3
+    auraFireRateBonusPercent: 0.3
+    revealsStealth: 1

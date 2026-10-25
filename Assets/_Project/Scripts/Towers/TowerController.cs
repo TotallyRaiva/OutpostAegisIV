@@ -39,6 +39,8 @@ namespace OutpostAegis.Towers
         private SpriteRenderer _baseRenderer;
         private Transform _turretTransform;
         private SpriteRenderer _turretRenderer;
+        private PixelSpriteAnimator _turretAnimator;
+        private Sprite[] _turretFrames;
         private LineRenderer _laserOrConeRenderer;
         private float _beamDisplayTimer;
 
@@ -123,11 +125,15 @@ namespace OutpostAegis.Towers
                 _turretTransform = turretObj.transform;
                 _turretRenderer = turretObj.AddComponent<SpriteRenderer>();
                 _turretRenderer.sortingOrder = 6;
+                _turretAnimator = turretObj.AddComponent<PixelSpriteAnimator>();
             }
             else
             {
                 _turretTransform = existingTurret;
                 _turretRenderer = existingTurret.GetComponent<SpriteRenderer>();
+                _turretAnimator = existingTurret.GetComponent<PixelSpriteAnimator>();
+                if (_turretAnimator == null)
+                    _turretAnimator = existingTurret.gameObject.AddComponent<PixelSpriteAnimator>();
             }
 
             if (_laserOrConeRenderer == null)
@@ -144,7 +150,20 @@ namespace OutpostAegis.Towers
         {
             if (Data == null) return;
             _baseRenderer.sprite = PixelSpriteGenerator.GetTowerBaseSprite(Data.category, CurrentTierIndex);
-            _turretRenderer.sprite = PixelSpriteGenerator.GetTowerTurretSprite(Data.category, CurrentTierIndex);
+            _turretFrames = PixelSpriteGenerator.GetTowerTurretFrames(Data.category, CurrentTierIndex);
+            _turretRenderer.sprite = _turretFrames[0];
+
+            if (_turretAnimator != null)
+            {
+                if (Data.isSupportTower)
+                {
+                    _turretAnimator.SetLoopAnimation(_turretFrames, fps: 5f, randomStartFrame: false);
+                }
+                else
+                {
+                    _turretAnimator.SetLoopAnimation(new[] { _turretFrames[0] }, fps: 1f, randomStartFrame: false);
+                }
+            }
         }
 
         private void Update()
@@ -255,6 +274,11 @@ namespace OutpostAegis.Towers
         private void ExecuteAttack(EnemyController primaryTarget)
         {
             TowerTierData tier = CurrentTierData;
+
+            if (_turretAnimator != null && _turretFrames != null && _turretFrames.Length > 1)
+            {
+                _turretAnimator.TriggerOneShotFrame(_turretFrames[1], 0.11f);
+            }
 
             if (Data.isContinuousCone)
             {

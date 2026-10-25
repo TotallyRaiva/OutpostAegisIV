@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab33327703b28497aa6dc86e26b88be3, type: 3}
+  m_Name: Tower_Lascannon
+  m_EditorClassIdentifier: 
+  towerId: lascannon
+  displayName: Lascannon Turret
+  category: 1
+  damageType: 1
+  allowedNodeTypes: 3
+  defaultPriority: 1
+  isContinuousCone: 0
+  isGlobalArtillery: 0
+  isSupportTower: 0
+  ignoresCover: 0
+  projectileSpeed: 18
+  primaryColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  accentColor: {r: 0.25, g: 0.9, b: 1, a: 1}
+  icon: {fileID: 0}
+  tiers:
+  - tierName: Godhammer Lascannon
+    description: Slow sniper beam dealing 200% damage to Killa Kans & Deff Dreads.
+    cost: 120
+    damage: 135
+    fireRate: 0.55
+    range: 5.8
+    areaParameter: 0
+    slowFactor: 0
+    slowDuration: 0
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0
+    auraFireRateBonusPercent: 0
+    revealsStealth: 0
+  - tierName: Overcharged Las-Talon
+    description: Amplified capacitor array increases range and armor-piercing damage.
+    cost: 160
+    damage: 230
+    fireRate: 0.68
+    range: 6.5
+    areaParameter: 0
+    slowFactor: 0
+    slowDuration: 0
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0
+    auraFireRateBonusPercent: 0
+    revealsStealth: 0
+  - tierName: Twin Magna-Lascannon
+    description: Sunders target armor (+20% damage from all sources for 4s).
+    cost: 240
+    damage: 380
+    fireRate: 0.8
+    range: 7.2
+    areaParameter: 0
+    slowFactor: 0
+    slowDuration: 0
+    armorVulnerabilityBonus: 0.2
+    armorVulnerabilityDuration: 4
+    auraRangeBonusPercent: 0
+    auraFireRateBonusPercent: 0
+    revealsStealth: 0

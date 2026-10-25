@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab33327703b28497aa6dc86e26b88be3, type: 3}
+  m_Name: Tower_HeavyBolter
+  m_EditorClassIdentifier: 
+  towerId: heavy_bolter
+  displayName: Heavy Bolter Bunker
+  category: 0
+  damageType: 0
+  allowedNodeTypes: 3
+  defaultPriority: 0
+  isContinuousCone: 0
+  isGlobalArtillery: 0
+  isSupportTower: 0
+  ignoresCover: 0
+  projectileSpeed: 22
+  primaryColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  accentColor: {r: 1, g: 0.85, b: 0.25, a: 1}
+  icon: {fileID: 0}
+  tiers:
+  - tierName: Mk-IV Heavy Bolter Nest
+    description: Fast-firing kinetic rounds. Strong vs Gretchin, Boyz & Fast Bikers.
+    cost: 75
+    damage: 20
+    fireRate: 3.2
+    range: 3.8
+    areaParameter: 0
+    slowFactor: 0
+    slowDuration: 0
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0
+    auraFireRateBonusPercent: 0
+    revealsStealth: 0
+  - tierName: Twin-Linked Heavy Bolter
+    description: Doubled rate of fire with Kraken penetrator bolts.
+    cost: 110
+    damage: 28
+    fireRate: 4.4
+    range: 4.2
+    areaParameter: 0
+    slowFactor: 0
+    slowDuration: 0
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0
+    auraFireRateBonusPercent: 0
+    revealsStealth: 0
+  - tierName: Vendetta Autocannon Bunker
+    description: High-caliber shells shred infantry and fast walkers across wide
+      range.
+    cost: 165
+    damage: 44
+    fireRate: 5.2
+    range: 4.7
+    areaParameter: 0
+    slowFactor: 0
+    slowDuration: 0
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0
+    auraFireRateBonusPercent: 0
+    revealsStealth: 0

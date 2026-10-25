@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95fda90f37b0b4909b46b7c86b3fc6db, type: 3}
+  m_Name: Wave_05
+  m_EditorClassIdentifier: 
+  waveNumber: 5
+  waveTitle: Speed Freeks Outriders
+  incomingTransmissionText: Fast Warbikers & Stormboyz bypassing terrain obstacles!
+    Use Heavy Bolters!
+  completionRequisitionBonus: 95
+  completionCommandPointBonus: 1
+  spawnGroups:
+  - groupNote: 9x Speed Freeks Warbiker (ScrapRoadNorth)
+    enemyData: {fileID: 11400000, guid: f4ebdf70dd1794c2aab6ef539f96673e, type: 2}
+    lane: 0
+    count: 9
+    spawnInterval: 0.75
+    delayBeforeGroup: 0
+  - groupNote: 9x Rokkit Stormboy (AshGullySouth)
+    enemyData: {fileID: 11400000, guid: ec7194593c83046c1a3ca5f1296a7b17, type: 2}
+    lane: 1
+    count: 9
+    spawnInterval: 0.65
+    delayBeforeGroup: 2

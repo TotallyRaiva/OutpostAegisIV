@@ -70,6 +70,7 @@ namespace OutpostAegis.Editor
             List<AbilityDataSO> abilities = GenerateAbilities();
 
             AssetDatabase.SaveAssets();
+            ExportPixelArtSpriteSheets();
             AssetDatabase.Refresh();
 
             BuildOutpostAegisScene(towers, waves, abilities);
@@ -526,12 +527,10 @@ namespace OutpostAegis.Editor
             camObj.AddComponent<AudioListener>();
             camObj.AddComponent<CameraController>();
 
-            // 2. Environment Visual Backdrop (Promethium River, Narrow Bridge, Convergence Causeway, Reactor Gate)
+            // 2. Detailed Pixel-Art Ash-Waste Tilemap, Animated Molten Promethium River, Bridge & Plasma Reactor
             GameObject envRoot = new GameObject("--- ENVIRONMENT & CHOKPOINTS ---");
-            CreateVisualStrip(envRoot.transform, "Promethium_River", new Vector3(-2.2f, 0f, 0f), new Vector3(1.1f, 13f, 1f), new Color(0.95f, 0.35f, 0.08f, 0.45f), 0);
-            CreateVisualStrip(envRoot.transform, "Narrow_Bridge_Deck", new Vector3(-2.2f, 2.2f, 0f), new Vector3(1.8f, 1.3f, 1f), new Color(0.35f, 0.34f, 0.32f, 0.9f), 1);
-            CreateVisualStrip(envRoot.transform, "Convergence_Causeway", new Vector3(4.2f, 0.2f, 0f), new Vector3(5.2f, 2.0f, 1f), new Color(0.28f, 0.26f, 0.24f, 0.85f), 0);
-            CreateVisualStrip(envRoot.transform, "Central_Plasma_Reactor_Core", new Vector3(7.6f, 0.2f, 0f), new Vector3(1.6f, 2.6f, 1f), new Color(0.2f, 0.75f, 1.0f, 0.9f), 3);
+            AshWasteMapRenderer mapRenderer = envRoot.AddComponent<AshWasteMapRenderer>();
+            mapRenderer.BuildPixelEnvironment();
 
             // 3. Cover Zone in Ash-Gully (ignored by Hellhound Flame-Bunker)
             GameObject coverObj = new GameObject("AshGully_CoverTrench");
@@ -675,6 +674,55 @@ namespace OutpostAegis.Editor
             sr.sprite = PixelSpriteGenerator.GetWhiteSquareSprite();
             sr.color = color;
             sr.sortingOrder = sortOrder;
+        }
+
+        [MenuItem("Tools/Outpost Aegis-IV/Export Pixel Art Sprite Sheets (.png)", priority = 2)]
+        public static void ExportPixelArtSpriteSheets()
+        {
+            string dir = "Assets/_Project/Art/Sprites";
+            System.IO.Directory.CreateDirectory(dir);
+
+            foreach (EnemyCategory cat in System.Enum.GetValues(typeof(EnemyCategory)))
+            {
+                SaveSpriteSheetPng(PixelSpriteGenerator.GetEnemyWalkFrames(cat), $"{dir}/Ork_{cat}_Walk4.png");
+            }
+
+            foreach (TowerCategory cat in System.Enum.GetValues(typeof(TowerCategory)))
+            {
+                for (int t = 0; t < 3; t++)
+                {
+                    SaveSpriteSheetPng(
+                        PixelSpriteGenerator.GetTowerTurretFrames(cat, t),
+                        $"{dir}/Tower_{cat}_Tier{t + 1}_Sheet.png");
+                }
+            }
+
+            SaveSpriteSheetPng(PixelSpriteGenerator.GetPromethiumRiverFrames(), $"{dir}/Env_PromethiumRiver_Flow4.png");
+            SaveSpriteSheetPng(PixelSpriteGenerator.GetPlasmaReactorFrames(), $"{dir}/Env_PlasmaReactor_Pulse4.png");
+            SaveSpriteSheetPng(new[] { PixelSpriteGenerator.GetNarrowBridgeSprite() }, $"{dir}/Env_NarrowBridge.png");
+
+            AssetDatabase.Refresh();
+            Debug.Log("[Outpost Aegis-IV] Exported 32 PPU multi-frame pixel-art PNG sprite sheets to " + dir);
+        }
+
+        private static void SaveSpriteSheetPng(Sprite[] frames, string filePath)
+        {
+            if (frames == null || frames.Length == 0 || frames[0] == null) return;
+
+            int frameW = frames[0].texture.width;
+            int frameH = frames[0].texture.height;
+            Texture2D sheet = new Texture2D(frameW * frames.Length, frameH, TextureFormat.RGBA32, false);
+
+            for (int i = 0; i < frames.Length; i++)
+            {
+                Color[] pixels = frames[i].texture.GetPixels();
+                sheet.SetPixels(i * frameW, 0, frameW, frameH, pixels);
+            }
+
+            sheet.Apply();
+            byte[] png = sheet.EncodeToPNG();
+            System.IO.File.WriteAllBytes(filePath, png);
+            Object.DestroyImmediate(sheet);
         }
 
         private static T CreateOrReplaceAsset<T>(string path) where T : ScriptableObject

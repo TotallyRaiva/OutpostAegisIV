@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab33327703b28497aa6dc86e26b88be3, type: 3}
+  m_Name: Tower_Basilisk
+  m_EditorClassIdentifier: 
+  towerId: basilisk_artillery
+  displayName: Basilisk Artillery Pit
+  category: 3
+  damageType: 3
+  allowedNodeTypes: 6
+  defaultPriority: 0
+  isContinuousCone: 0
+  isGlobalArtillery: 1
+  isSupportTower: 0
+  ignoresCover: 1
+  projectileSpeed: 11
+  primaryColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  accentColor: {r: 1, g: 0.35, b: 0.15, a: 1}
+  icon: {fileID: 0}
+  tiers:
+  - tierName: Earthshaker Battery
+    description: Global range explosive shells that splash and slow Ork advances
+      by 30%.
+    cost: 150
+    damage: 95
+    fireRate: 0.32
+    range: 25
+    areaParameter: 1.8
+    slowFactor: 0.3
+    slowDuration: 2.2
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0
+    auraFireRateBonusPercent: 0
+    revealsStealth: 0
+  - tierName: Medusa Siege Mortar
+    description: Larger blast radius and heavier concussive shockwaves (40% slow).
+    cost: 200
+    damage: 155
+    fireRate: 0.38
+    range: 25
+    areaParameter: 2.3
+    slowFactor: 0.4
+    slowDuration: 2.8
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0
+    auraFireRateBonusPercent: 0
+    revealsStealth: 0
+  - tierName: Tremor Quake Cannon
+    description: Massive seismic shells devastate clustered waves and cripple movement
+      (50% slow).
+    cost: 280
+    damage: 245
+    fireRate: 0.45
+    range: 25
+    areaParameter: 2.8
+    slowFactor: 0.5
+    slowDuration: 3.5
+    armorVulnerabilityBonus: 0
+    armorVulnerabilityDuration: 0
+    auraRangeBonusPercent: 0
+    auraFireRateBonusPercent: 0
+    revealsStealth: 0

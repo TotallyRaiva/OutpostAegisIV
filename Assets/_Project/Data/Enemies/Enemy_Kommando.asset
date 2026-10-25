@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3013e2bfe1e4346bea460e2fefca74, type: 3}
+  m_Name: Enemy_Kommando
+  m_EditorClassIdentifier: 
+  enemyId: enemy_kommando
+  displayName: Blood Axe Kommando
+  category: 4
+  armorType: 1
+  maxHealth: 165
+  moveSpeed: 2.15
+  meleeDPS: 12
+  requisitionReward: 18
+  reactorDamage: 2
+  isStealthUnit: 1
+  bypassesTerrainObstacles: 0
+  isBoss: 0
+  bossRoarInterval: 12
+  bossRoarRadius: 5.5
+  bossRoarSpeedMultiplier: 1.45
+  bossRoarDuration: 4
+  bossTowerDisableInterval: 14
+  bossTowerDisableRadius: 5
+  bossTowerDisableDuration: 4.5
+  bossMaxTowersDisabled: 2
+  tintColor: {r: 0.25, g: 0.65, b: 0.2, a: 1}
+  visualScale: 1
+  sprite: {fileID: 0}

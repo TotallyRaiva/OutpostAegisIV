@@ -89,11 +89,18 @@ namespace OutpostAegis.Enemies
             if (_spriteRenderer == null)
                 _spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
 
-            _spriteRenderer.sprite = Data.sprite != null
-                ? Data.sprite
-                : PixelSpriteGenerator.GetEnemySprite(Data.category);
+            Sprite[] walkFrames = PixelSpriteGenerator.GetEnemyWalkFrames(Data.category);
+            _spriteRenderer.sprite = Data.sprite != null ? Data.sprite : walkFrames[0];
             _spriteRenderer.sortingOrder = 10;
             transform.localScale = Vector3.one * Data.visualScale;
+
+            if (Data.sprite == null && walkFrames.Length > 1)
+            {
+                PixelSpriteAnimator anim = GetComponent<PixelSpriteAnimator>();
+                if (anim == null) anim = gameObject.AddComponent<PixelSpriteAnimator>();
+                float animFps = Mathf.Clamp(Data.moveSpeed * 4.2f, 5f, 12f);
+                anim.SetLoopAnimation(walkFrames, animFps, randomStartFrame: true);
+            }
 
             // Create world-space pixel health bar
             Transform existingBar = transform.Find("HealthBarBg");

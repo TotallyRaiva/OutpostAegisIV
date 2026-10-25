@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d604df40a77a64a2dab1de36628ba8f1, type: 3}
+  m_Name: Ability_DropPodAssault
+  m_EditorClassIdentifier: 
+  abilityId: drop_pod_assault
+  displayName: Drop Pod Assault
+  abilityType: 1
+  description: Deploys 3 Space Marines onto the path for 15s to physically block
+    and fight Orks.
+  commandPointCost: 2
+  cooldownSeconds: 35
+  effectRadius: 2.4
+  impactDamage: 180
+  damageType: 3
+  strikeWarningDelay: 1.2
+  squadLifetimeSeconds: 15
+  marineCount: 3
+  maxBlockedEnemies: 4
+  squadMeleeDPS: 55
+  squadBolterDPS: 35
+  squadEngagementRadius: 2.8
+  indicatorColor: {r: 0.25, g: 0.65, b: 1, a: 0.65}
